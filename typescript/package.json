@@ -1,0 +1,28 @@
+{
+  "scripts": {
+    "uploadImage": "ts-node ./assets/uploadImage.ts",
+    "assetMetadata": "ts-node ./assets/assetMetadata.ts",
+    "mintAsset": "ts-node ./assets/mintAsset.ts",
+    "createCollection": "ts-node ./assets/createCollection.ts",
+    "addAsset": "ts-node ./assets/addAsset.ts",
+    "stake": "ts-node ./stake/stake.ts",
+    "unstake": "ts-node ./stake/unstake.ts",
+    "readAttributeData": "ts-node ./stake/readAttributeData.ts"
+  },
+  "dependencies": {
+    "@metaplex-foundation/digital-asset-standard-api": "^1.0.3",
+    "@metaplex-foundation/mpl-core": "1.1.0-alpha.0",
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
+    "@metaplex-foundation/umi-uploader-irys": "^0.9.1",
+    "@project-serum/anchor": "^0.26.0",
+    "@solana/spl-token": "^0.4.6",
+    "@solana/web3.js": "^1.91.7",
+    "@types/node": "^20.12.7",
+    "bs58": "^5.0.0",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  }
+}
