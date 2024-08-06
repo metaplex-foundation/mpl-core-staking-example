@@ -7,7 +7,7 @@ use mpl_core::{
     types::{Attribute, Attributes, FreezeDelegate, Plugin, PluginAuthority, PluginType, UpdateAuthority}, 
 };
 
-declare_id!("4T8mkjxRH1S8ntrAGavdtBPy2N8iQd74G2iyCrAU32NQ");
+declare_id!("2ni2nmjhvYD8trLvmWH7CnAhm9gKmmafCGwW6Ank4atr");
 
 #[program]
 pub mod core_rust_staking_example {
@@ -80,7 +80,7 @@ pub mod core_rust_staking_example {
         Ok(())
     }
 
-    pub fn unstake(ctx: Context<Unstake>) -> Result<()> {
+    pub fn unstake(ctx: Context<Stake>) -> Result<()> {
         // Check if the asset has the attribute plugin already on
         match fetch_plugin::<BaseAssetV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes) {
             Ok((_, fetched_attribute_list, _)) => {
@@ -157,36 +157,13 @@ pub struct Stake<'info> {
     pub payer: Signer<'info>,
     #[account(
         mut,
-        constraint = asset.owner == owner.key(),
+        has_one = owner,
         constraint = asset.update_authority == UpdateAuthority::Collection(collection.key()),
     )]
     pub asset: Account<'info, BaseAssetV1>,
     #[account(
         mut,
-        constraint = collection.update_authority == update_authority.key(),
-    )]
-    pub collection: Account<'info, BaseCollectionV1>,
-    #[account(address = CORE_PROGRAM_ID)]
-    /// CHECK: this will be checked by core
-    pub core_program: UncheckedAccount<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-pub struct Unstake<'info> {
-    pub owner: Signer<'info>,
-    pub update_authority: Signer<'info>,
-    #[account(mut)]
-    pub payer: Signer<'info>,
-    #[account(
-        mut,
-        constraint = asset.owner == owner.key(),
-        constraint = asset.update_authority == UpdateAuthority::Collection(collection.key()),
-    )]
-    pub asset: Account<'info, BaseAssetV1>,
-    #[account(
-        mut,
-        constraint = collection.update_authority == update_authority.key(),
+        has_one = update_authority
     )]
     pub collection: Account<'info, BaseCollectionV1>,
     #[account(address = CORE_PROGRAM_ID)]

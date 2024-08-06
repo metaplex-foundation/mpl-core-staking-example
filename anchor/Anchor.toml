@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-core_rust_staking_example = "4T8mkjxRH1S8ntrAGavdtBPy2N8iQd74G2iyCrAU32NQ"
+core_rust_staking_example = "2ni2nmjhvYD8trLvmWH7CnAhm9gKmmafCGwW6Ank4atr"
 
 [registry]
 url = "https://api.apr.dev"
